@@ -1,0 +1,7 @@
+<section>
+  <p>Welcome!</p>
+  <form (ngSubmit)="onSubmit(loginForm.value)" [formGroup]="loginForm">
+    <input type="text" name="name" placeholder="Name" formControlName="name" />
+    <button type="submit" routerLink="['/room']">Login</button>
+  </form>
+</section>

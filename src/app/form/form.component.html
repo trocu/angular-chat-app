@@ -1,0 +1,13 @@
+<section class="section">
+  <h1>Send message</h1>
+  <form class="form" (ngSubmit)="onSubmit(form.value)" [formGroup]="form">
+    <input type="text" name="name" placeholder="Name" formControlName="name" />
+    <textarea
+      type="text"
+      name="message"
+      placeholder="Message"
+      formControlName="message"
+    ></textarea>
+    <button type="submit">Send</button>
+  </form>
+</section>
