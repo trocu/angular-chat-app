@@ -1,7 +1,6 @@
 <section class="section">
-  <h1>Send message</h1>
+  <p>Name: {{ user.name }}</p>
   <form class="form" (ngSubmit)="onSubmit(form.value)" [formGroup]="form">
-    <input type="text" name="name" placeholder="Name" formControlName="name" />
     <textarea
       type="text"
       name="message"

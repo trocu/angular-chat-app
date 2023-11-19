@@ -1,8 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ReactiveFormsModule } from '@angular/forms';
-import { FormGroup, FormControl } from '@angular/forms';
+import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { LoginService } from '../services/login.service';
 
 @Component({
   selector: 'app-login',
@@ -12,17 +13,26 @@ import { Router } from '@angular/router';
   styleUrls: ['./login.component.css'],
 })
 export class LoginComponent implements OnInit {
-  loginForm!: FormGroup;
+  form!: FormGroup;
 
-  constructor(private router: Router) {}
+  constructor(private router: Router, private loginService: LoginService) {}
 
   ngOnInit() {
-    this.loginForm = new FormGroup({
-      name: new FormControl(),
+    this.form = new FormGroup({
+      name: new FormControl(
+        '',
+        Validators.compose([
+          Validators.required,
+          Validators.pattern('^(?!.*\\.\\.)(?!.*\\.$)[^\\W][\\w.]{3,29}$'),
+        ])
+      ),
     });
   }
-  onSubmit(loginForm: object) {
+
+  nameValidator(control: FormControl) {}
+
+  onSubmit(form: FormGroup) {
+    this.loginService.setName(form);
     this.router.navigate(['/room']);
-    console.log(loginForm);
   }
 }

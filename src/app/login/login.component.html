@@ -1,7 +1,13 @@
 <section>
   <p>Welcome!</p>
-  <form (ngSubmit)="onSubmit(loginForm.value)" [formGroup]="loginForm">
+  <form (ngSubmit)="onSubmit(form.value)" [formGroup]="form">
     <input type="text" name="name" placeholder="Name" formControlName="name" />
-    <button type="submit" routerLink="['/room']">Login</button>
+    <button type="submit" [disabled]="!form.valid">Login</button>
+    <div
+      *ngIf="form.controls['name'].dirty && form.controls['name'].invalid"
+      class="error"
+    >
+      Usernames can contain characters a-z, 0-9, underscores and periods
+    </div>
   </form>
 </section>

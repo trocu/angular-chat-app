@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ReactiveFormsModule } from '@angular/forms';
 import { FormGroup, FormControl } from '@angular/forms';
+import { LoginService } from '../services/login.service';
 
 @Component({
   selector: 'app-form',
@@ -12,14 +13,19 @@ import { FormGroup, FormControl } from '@angular/forms';
 })
 export class FormComponent implements OnInit {
   form!: FormGroup;
+  user!: any;
+
+  constructor(private loginService: LoginService) {}
 
   ngOnInit() {
+    this.loginService.userName$.subscribe((name) => {
+      this.user = name;
+    });
     this.form = new FormGroup({
-      name: new FormControl(),
-      message: new FormControl(),
+      message: new FormControl(''),
     });
   }
-  onSubmit(form: object) {
-    console.log(form);
+  onSubmit(form: FormGroup) {
+    console.log({ ...this.user, ...form });
   }
 }
