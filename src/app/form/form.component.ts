@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { ReactiveFormsModule } from '@angular/forms';
 import { FormGroup, FormControl } from '@angular/forms';
 import { LoginService } from '../services/login.service';
+import { ApiService } from '../services/api.service';
 
 @Component({
   selector: 'app-form',
@@ -15,14 +16,22 @@ export class FormComponent implements OnInit {
   form!: FormGroup;
   user!: any;
 
-  constructor(private loginService: LoginService) {}
+  constructor(
+    private loginService: LoginService,
+    private apiService: ApiService
+  ) {}
 
-  ngOnInit() {
+  ngOnInit(): void {
+    this.apiService.get().subscribe({
+      next: (messages) => {
+        console.log(messages);
+      },
+    });
     this.loginService.userName$.subscribe((name) => {
       this.user = name;
     });
     this.form = new FormGroup({
-      message: new FormControl(''),
+      message: new FormControl<string>(''),
     });
   }
   onSubmit(form: FormGroup) {
