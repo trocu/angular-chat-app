@@ -1,5 +1,5 @@
 <section>
-  <p>Welcome!</p>
+  <p>Enter your name and start chatting!</p>
   <form (ngSubmit)="onSubmit(form.value)" [formGroup]="form">
     <input type="text" name="name" placeholder="Name" formControlName="name" />
     <button type="submit" [disabled]="!form.valid">Login</button>

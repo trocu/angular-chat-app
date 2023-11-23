@@ -33,6 +33,6 @@ export class LoginComponent implements OnInit {
 
   onSubmit(form: FormGroup) {
     this.loginService.setName(form);
-    this.router.navigate(['/room']);
+    this.router.navigate(['/chat']);
   }
 }
