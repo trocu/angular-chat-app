@@ -1,1 +1,18 @@
-<p>room-chatbox works!</p>
+<section class="section">
+  <div>
+    <ul>
+      <li *ngFor="let message of messages">
+        {{ message.name | uppercase }} {{ message.message }}
+      </li>
+    </ul>
+  </div>
+  <form class="form" (ngSubmit)="onSubmit(form.value)" [formGroup]="form">
+    <input
+      type="text"
+      name="message"
+      placeholder="Message"
+      formControlName="message"
+    />
+    <button type="submit">Send</button>
+  </form>
+</section>
