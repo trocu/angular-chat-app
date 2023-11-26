@@ -1,11 +1,13 @@
 <section class="section">
-  <div>
+  <div *ngIf="messages.length > 0; else noMessage">
     <ul>
-      <li *ngFor="let message of messages">
+      <li *ngFor="let message of messages; index as i">
         {{ message.name | uppercase }} {{ message.message }}
+        <button type="button" (click)="deleteMessage(i)">Delete</button>
       </li>
     </ul>
   </div>
+  <ng-template #noMessage><p>No messages, write something!</p></ng-template>
   <form class="form" (ngSubmit)="onSubmit(form.value)" [formGroup]="form">
     <input
       type="text"

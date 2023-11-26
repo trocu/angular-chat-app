@@ -35,7 +35,13 @@ export class RoomChatboxComponent implements OnInit {
       message: new FormControl<string>(''),
     });
   }
+
+  deleteMessage(i: number) {
+    this.messages.splice(i, 1);
+  }
+
   onSubmit(form: FormGroup) {
+    this.form.reset();
     this.messages.push({ ...this.user, ...form });
     console.log(this.messages);
 

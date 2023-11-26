@@ -1,6 +1,8 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
 
+const USER_NAME = 'user_name';
+
 @Injectable({
   providedIn: 'root',
 })
@@ -12,5 +14,6 @@ export class LoginService {
 
   setName(name: object) {
     this.userName.next(name);
+    localStorage.setItem(USER_NAME, JSON.stringify(this.userName.value));
   }
 }
