@@ -1,19 +1,18 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
-
-const USER_NAME = 'user_name';
+import { User } from '../shared/interfaces/user.interface';
 
 @Injectable({
   providedIn: 'root',
 })
 export class LoginService {
-  private userName = new BehaviorSubject<object>({});
+  private userName = new BehaviorSubject<User>({name: ''});
   userName$ = this.userName.asObservable();
 
   constructor() {}
 
-  setName(name: object) {
+  setName(name: User) {
+    localStorage.setItem('user_name', JSON.stringify(name));
     this.userName.next(name);
-    localStorage.setItem(USER_NAME, JSON.stringify(this.userName.value));
   }
 }
